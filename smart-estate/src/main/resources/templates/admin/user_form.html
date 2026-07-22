@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('User form')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-user-form',
+        title: [[${isNew} ? 'Add user' : 'Edit user']],
+        data: {
+            isNew: [[${isNew}]],
+            userId: [[${user != null ? user.id : null}]],
+            name: [[${user != null ? user.name : null}]],
+            email: [[${user != null ? user.email : null}]],
+            phone: [[${user != null ? user.phone : null}]],
+            role: [[${user != null and user.role != null ? user.role.name() : null}]],
+            language: [[${user != null and user.language != null ? user.language.name() : null}]],
+            unitId: [[${user != null and user.unit != null ? user.unit.id : null}]],
+            units: [
+                /*[# th:each="u : ${units}"]*/
+                {
+                    id: [[${u.id}]],
+                    fullCode: [[${u.fullCode}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

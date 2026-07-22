@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Notifications')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-notifications',
+        title: 'Notifications',
+        data: {
+            rows: [
+                /*[# th:each="row : ${rows}"]*/
+                {
+                    id: [[${row.notification.id}]],
+                    createdAt: [[${#temporals.format(row.notification.createdAt, 'MM-dd HH:mm')}]],
+                    title: [[${row.notification.title}]],
+                    titleZh: [[${row.notification.titleZh}]],
+                    category: [[${row.notification.category.name()}]],
+                    recipientScope: [[${row.notification.recipientScope}]],
+                    dispatched: [[${row.notification.dispatched}]],
+                    scheduledAt: [[${row.notification.scheduledAt != null ? #temporals.format(row.notification.scheduledAt, 'MM-dd HH:mm') : null}]],
+                    recipients: [[${row.stats.recipients}]],
+                    deliveryRatePct: [[${row.stats.deliveryRatePct()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

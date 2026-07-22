@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Inbox')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-inbox',
+        title: 'Inbox',
+        data: {
+            inbox: [
+                /*[# th:each="item : ${inbox}"]*/
+                {
+                    id: [[${item.notification.id}]],
+                    title: [[${item.notification.title}]],
+                    titleZh: [[${item.notification.titleZh}]],
+                    category: [[${item.notification.category.name()}]],
+                    dispatchedAt: [[${#temporals.format(item.notification.dispatchedAt, 'MM-dd HH:mm')}]],
+                    severity: [[${item.notification.severity.name()}]],
+                    read: [[${item.read}]],
+                    status: [[${item.bestStatus.name()}]],
+                    channels: [[${item.channelsSummary}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

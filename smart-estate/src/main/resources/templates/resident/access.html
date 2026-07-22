@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Access card')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-access',
+        title: 'Access card',
+        data: {
+            card: /*[# th:if="${card != null}"]*/ {
+                cardNumber: [[${card != null ? card.cardNumber : null}]],
+                status: [[${card != null ? card.status.name() : null}]],
+                registeredAt: [[${card != null and card.registeredAt != null ? #temporals.format(card.registeredAt, 'yyyy-MM-dd') : null}]]
+            } /*[/]*/ /*[# th:unless="${card != null}"]*/ null /*[/]*/,
+            requests: [
+                /*[# th:each="r : ${requests}"]*/
+                {
+                    id: [[${r.id}]],
+                    action: [[${r.action.name()}]],
+                    cardNumber: [[${r.cardNumber}]],
+                    status: [[${r.status.name()}]],
+                    createdAt: [[${r.createdAt != null ? #temporals.format(r.createdAt, 'MM-dd HH:mm') : null}]],
+                    decidedBy: [[${r.decidedByName}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

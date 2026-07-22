@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('AI Evaluation')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'ai-evaluation',
+        title: 'AI Evaluation',
+        data: {
+            classification: {
+                n: [[${classification.n}]],
+                correct: [[${classification.correct}]],
+                accuracyPct: [[${classification.accuracyPct}]],
+                k: [[${classification.k}]],
+                trainSize: [[${classification.trainSize}]],
+                perCategory: [
+                    /*[# th:each="pc : ${classification.perCategory}"]*/
+                    {
+                        category: [[${pc.category.name()}]],
+                        total: [[${pc.total}]],
+                        correct: [[${pc.correct}]],
+                        accuracyPct: [[${pc.accuracyPct}]]
+                    },
+                    /*[/]*/
+                ],
+                examples: [
+                    /*[# th:each="ex : ${classification.examples}"]*/
+                    {
+                        refNumber: [[${ex.refNumber}]],
+                        actual: [[${ex.actual.name()}]],
+                        predicted: [[${ex.predicted != null ? ex.predicted.name() : null}]],
+                        correct: [[${ex.correct}]]
+                    },
+                    /*[/]*/
+                ]
+            },
+            retrieval: {
+                n: [[${retrieval.n}]],
+                recall1Pct: [[${retrieval.recall1Pct}]],
+                recall3Pct: [[${retrieval.recall3Pct}]],
+                recall5Pct: [[${retrieval.recall5Pct}]],
+                mrr: [[${retrieval.mrr}]],
+                avgServedDocs: [[${retrieval.avgServedDocs}]],
+                rows: [
+                    /*[# th:each="r : ${retrieval.rows}"]*/
+                    {
+                        question: [[${r.question}]],
+                        expected: [[${r.expected}]],
+                        rank: [[${r.rank}]],
+                        topDocs: [[${r.topDocs}]]
+                    },
+                    /*[/]*/
+                ]
+            },
+            followups: {
+                n: [[${followups.n}]],
+                hitsWith: [[${followups.hitsWith}]],
+                hitsWithout: [[${followups.hitsWithout}]],
+                rows: [
+                    /*[# th:each="f : ${followups.rows}"]*/
+                    {
+                        prior: [[${f.prior}]],
+                        followUp: [[${f.followUp}]],
+                        expected: [[${f.expected}]],
+                        rankWithout: [[${f.rankWithout}]],
+                        rankWith: [[${f.rankWith}]],
+                        improved: [[${f.improved}]]
+                    },
+                    /*[/]*/
+                ]
+            },
+            bilingual: {
+                n: [[${bilingual.n}]],
+                hitsEn: [[${bilingual.hitsEn}]],
+                hitsZh: [[${bilingual.hitsZh}]],
+                bothTop1: [[${bilingual.bothTop1}]],
+                rows: [
+                    /*[# th:each="b : ${bilingual.rows}"]*/
+                    {
+                        english: [[${b.english}]],
+                        chinese: [[${b.chinese}]],
+                        expected: [[${b.expected}]],
+                        rankEn: [[${b.rankEn}]],
+                        rankZh: [[${b.rankZh}]],
+                        bothTop1: [[${b.bothTop1}]]
+                    },
+                    /*[/]*/
+                ]
+            }
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

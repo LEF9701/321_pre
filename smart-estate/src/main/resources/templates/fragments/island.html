@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+  Shared chrome for the React island. Every page template:
+    <head th:replace="~{fragments/island :: head('Title')}"></head>
+    ...injects window.__APP__ via :: appctx and its own window.__PAGE__...
+    <script th:replace="~{fragments/island :: bundle}"></script>
+-->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title} + ' — Smart Estate'">Smart Estate</title>
+    <!-- set theme and language before paint to avoid a flash of the wrong scheme/locale -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('se-theme') ||
+                    ((window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+            try {
+                var l = localStorage.getItem('se-lang');
+                if (l) document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-Hant-HK' : 'en');
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" th:href="@{/app/smart-estate.css}"/>
+</head>
+
+<body>
+
+<!-- Common app context shared by every authenticated page. -->
+<th:block th:fragment="appctx">
+    <script th:inline="javascript">
+        window.__APP__ = {
+            csrf: {
+                parameterName: [[${_csrf != null ? _csrf.parameterName : '_csrf'}]],
+                token: [[${_csrf != null ? _csrf.token : ''}]],
+                headerName: [[${_csrf != null ? _csrf.headerName : 'X-CSRF-TOKEN'}]]
+            },
+            user: {
+                id: [[${currentUser != null ? currentUser.id : null}]],
+                name: [[${currentUser != null ? currentUser.name : null}]],
+                role: [[${currentUser != null ? currentUser.role.name() : null}]],
+                // seeds the initial UI locale on a browser that has not chosen one yet
+                language: [[${currentUser != null and currentUser.language != null ? currentUser.language.name() : null}]]
+            },
+            activeEmergency: {
+                type: [[${activeEmergency != null ? activeEmergency.type.name() : null}]],
+                declaredAt: [[${activeEmergency != null ? #temporals.format(activeEmergency.declaredAt, 'yyyy-MM-dd HH:mm') : null}]],
+                declaredBy: [[${activeEmergency != null ? activeEmergency.declaredBy : null}]]
+            },
+            // `msg`/`error` are the English text; the *Code/*Args pair lets the
+            // React side re-render the same message in the reader's language.
+            flash: {
+                msg: [[${msg}]],
+                msgCode: [[${msgCode}]],
+                msgArgs: [[${msgArgs}]],
+                error: [[${error}]],
+                errorCode: [[${errorCode}]],
+                errorArgs: [[${errorArgs}]]
+            }
+        };
+    </script>
+</th:block>
+
+<!-- The compiled React island. -->
+<script th:fragment="bundle" type="module" th:src="@{/app/smart-estate.js}"></script>
+
+</body>
+</html>

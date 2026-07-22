@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head(${unit.fullCode})}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-fee-detail',
+        title: [[${unit.fullCode}]],
+        data: {
+            unit: {
+                id: [[${unit.id}]],
+                unitCode: [[${unit.unitCode}]],
+                fullCode: [[${unit.fullCode}]],
+                feeStatus: [[${unit.feeStatus.name()}]],
+                balance: [[${unit.balance}]],
+                dueDate: [[${unit.dueDate != null ? #temporals.format(unit.dueDate, 'yyyy-MM-dd') : null}]],
+                status: [[${unit.status.name()}]]
+            },
+            occupant: [[${occupant != null}]] ? {
+                name: [[${occupant != null ? occupant.name : null}]],
+                email: [[${occupant != null ? occupant.email : null}]],
+                phone: [[${occupant != null ? occupant.phone : null}]]
+            } : null,
+            reminders: [
+                /*[# th:each="r : ${reminders}"]*/
+                {
+                    id: [[${r.notification.id}]],
+                    title: [[${r.notification.title}]],
+                    titleZh: [[${r.notification.titleZh}]],
+                    dispatchedAt: [[${r.notification.dispatchedAt != null ? #temporals.format(r.notification.dispatchedAt, 'yyyy-MM-dd HH:mm') : null}]],
+                    channels: [[${r.channels}]],
+                    status: [[${r.status.name()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

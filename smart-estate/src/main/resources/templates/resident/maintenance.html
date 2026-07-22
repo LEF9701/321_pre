@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Maintenance Schedule')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-maintenance',
+        title: 'Maintenance Schedule',
+        data: {
+            schedules: [
+                /*[# th:each="s : ${schedules}"]*/
+                {
+                    date: [[${#temporals.format(s.scheduledDate, 'yyyy-MM-dd')}]],
+                    title: [[${s.title}]],
+                    description: [[${s.description}]],
+                    affectedScope: [[${s.affectedScope}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

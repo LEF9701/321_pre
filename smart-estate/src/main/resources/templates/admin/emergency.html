@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Emergency control')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-emergency',
+        title: 'Emergency Control',
+        data: {
+            residentCount: [[${residentCount}]],
+            active: /*[# th:if="${active != null}"]*/ {
+                id: [[${active != null ? active.id : null}]],
+                type: [[${active != null ? active.type.name() : null}]],
+                declaredAt: [[${active != null ? #temporals.format(active.declaredAt, 'yyyy-MM-dd HH:mm') : null}]],
+                declaredBy: [[${active != null ? active.declaredBy : null}]],
+                note: [[${active != null ? active.note : null}]]
+            } /*[/]*/ /*[# th:unless="${active != null}"]*/ null /*[/]*/,
+            pre: {
+                title: [[${preTitle}]],
+                titleZh: [[${preTitleZh}]],
+                contentEn: [[${preContentEn}]],
+                contentZh: [[${preContentZh}]],
+                severity: [[${preSeverity != null ? preSeverity.name() : null}]]
+            },
+            emergencyTemplates: [
+                /*[# th:each="t : ${emergencyTemplates}"]*/
+                {
+                    code: [[${t.code}]],
+                    name: [[${t.name}]]
+                },
+                /*[/]*/
+            ],
+            broadcasts: [
+                /*[# th:each="row : ${broadcasts}"]*/
+                {
+                    id: [[${row.notification.id}]],
+                    title: [[${row.notification.title}]],
+                    titleZh: [[${row.notification.titleZh}]],
+                    dispatchedAt: [[${#temporals.format(row.notification.dispatchedAt, 'MM-dd HH:mm')}]],
+                    recipients: [[${row.stats.recipients}]],
+                    delivered: [[${row.stats.delivered}]],
+                    attempts: [[${row.stats.attempts}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

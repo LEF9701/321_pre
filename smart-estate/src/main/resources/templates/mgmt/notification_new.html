@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Compose Notification')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-notification-new',
+        title: 'Compose Notification',
+        data: {
+            templates: [
+                /*[# th:each="t : ${templates}"]*/
+                { code: [[${t.code}]], name: [[${t.name}]] },
+                /*[/]*/
+            ],
+            categories: [
+                /*[# th:each="c : ${categories}"]*/
+                { value: [[${c.name()}]], label: [[${c.label}]] },
+                /*[/]*/
+            ],
+            buildings: [
+                /*[# th:each="b : ${buildings}"]*/
+                { id: [[${b.id}]], name: [[${b.name}]] },
+                /*[/]*/
+            ],
+            blocks: [
+                /*[# th:each="b : ${blocks}"]*/
+                { id: [[${b.id}]], blockName: [[${b.blockName}]] },
+                /*[/]*/
+            ],
+            pre: {
+                title: [[${preTitle}]],
+                titleZh: [[${preTitleZh}]],
+                contentEn: [[${preContentEn}]],
+                contentZh: [[${preContentZh}]],
+                category: [[${preCategory != null ? preCategory.name() : null}]],
+                severity: [[${preSeverity != null ? preSeverity.name() : null}]],
+                template: [[${preTemplate}]]
+            }
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

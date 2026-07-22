@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Notification detail')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-notification-detail',
+        title: [[${n.title}]],
+        data: {
+            n: {
+                id: [[${n.id}]],
+                title: [[${n.title}]],
+                titleZh: [[${n.titleZh}]],
+                category: [[${n.category.name()}]],
+                severity: [[${n.severity.name()}]],
+                contentEn: [[${n.contentEn}]],
+                contentZh: [[${n.contentZh}]],
+                recipientScope: [[${n.recipientScope}]],
+                forcedAllChannels: [[${n.forcedAllChannels}]],
+                dispatchedAt: [[${n.dispatchedAt != null ? #temporals.format(n.dispatchedAt, 'yyyy-MM-dd HH:mm') : null}]]
+            },
+            stats: {
+                recipients: [[${stats.recipients}]],
+                attempts: [[${stats.attempts}]],
+                delivered: [[${stats.delivered}]],
+                read: [[${stats.read}]],
+                failed: [[${stats.failed}]],
+                pending: [[${stats.pending}]],
+                deliveryRatePct: [[${stats.deliveryRatePct()}]],
+                readRatePct: [[${stats.readRatePct()}]],
+                perChannel: [
+                    /*[# th:each="e : ${stats.perChannel}"]*/
+                    {
+                        channel: [[${e.key.name()}]],
+                        attempts: [[${e.value[0]}]],
+                        delivered: [[${e.value[1]}]],
+                        read: [[${e.value[2]}]],
+                        failed: [[${e.value[3]}]]
+                    },
+                    /*[/]*/
+                ]
+            },
+            logs: [
+                /*[# th:each="l : ${logs}"]*/
+                {
+                    recipientName: [[${l.recipient != null ? l.recipient.name : null}]],
+                    channel: [[${l.channel.name()}]],
+                    recipientAddress: [[${l.recipientAddress}]],
+                    status: [[${l.status.name()}]],
+                    sentAt: [[${l.sentAt != null ? #temporals.format(l.sentAt, 'HH:mm:ss') : null}]],
+                    deliveredAt: [[${l.deliveredAt != null ? #temporals.format(l.deliveredAt, 'HH:mm:ss') : null}]],
+                    readAt: [[${l.readAt != null ? #temporals.format(l.readAt, 'HH:mm:ss') : null}]],
+                    escalation: [[${l.escalation}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

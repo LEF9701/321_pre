@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Estate — dev harness</title>
+    <!--
+      Dev-only harness. In production the Spring/Thymeleaf templates inject
+      window.__PAGE__ themselves. Here we load mock data so the design system
+      can be previewed with `npm run dev`. Pick a page with ?page=<name>.
+    -->
+    <script type="module" src="/src/dev/mock.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

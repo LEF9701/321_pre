@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Sensors')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-iot',
+        title: 'Sensors',
+        data: {
+            sensors: [
+                /*[# th:each="s : ${sensors}"]*/
+                {
+                    id: [[${s.id}]],
+                    code: [[${s.code}]],
+                    type: [[${s.type}]],
+                    status: [[${s.status}]],
+                    severity: [[${s.severity}]],
+                    location: [[${s.location}]],
+                    fireType: [[${s.fireType}]],
+                    at: [[${s.at}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

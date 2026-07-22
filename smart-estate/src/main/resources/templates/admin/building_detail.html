@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Building')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-building-detail',
+        title: [[${building.name}]],
+        data: {
+            building: {
+                id: [[${building.id}]],
+                name: [[${building.name}]],
+                address: [[${building.address}]],
+                district: [[${building.district}]]
+            },
+            rows: [
+                /*[# th:each="row : ${rows}"]*/
+                {
+                    id: [[${row.block.id}]],
+                    blockName: [[${row.block.blockName}]],
+                    blockType: [[${row.block.blockType}]],
+                    floors: [[${row.floors}]],
+                    units: [[${row.units}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

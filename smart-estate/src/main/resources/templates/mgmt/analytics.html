@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Analytics')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-analytics',
+        title: 'Delivery Analytics',
+        data: {
+            overall: {
+                attempts: [[${overall.attempts}]],
+                delivered: [[${overall.delivered}]],
+                read: [[${overall.read}]],
+                failed: [[${overall.failed}]],
+                deliveryRatePct: [[${overall.deliveryRatePct()}]],
+                readRatePct: [[${overall.readRatePct()}]],
+                perChannel: [
+                    /*[# th:each="e : ${overall.perChannel}"]*/
+                    {
+                        channel: [[${e.key.name()}]],
+                        attempts: [[${e.value[0]}]],
+                        delivered: [[${e.value[1]}]],
+                        read: [[${e.value[2]}]],
+                        failed: [[${e.value[3]}]]
+                    },
+                    /*[/]*/
+                ]
+            },
+            rows: [
+                /*[# th:each="row : ${rows}"]*/
+                {
+                    id: [[${row.notification.id}]],
+                    createdAt: [[${#temporals.format(row.notification.createdAt, 'MM-dd HH:mm')}]],
+                    title: [[${row.notification.title}]],
+                    titleZh: [[${row.notification.titleZh}]],
+                    category: [[${row.notification.category.name()}]],
+                    recipients: [[${row.stats.recipients}]],
+                    deliveryRatePct: [[${row.stats.deliveryRatePct()}]],
+                    readRatePct: [[${row.stats.readRatePct()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

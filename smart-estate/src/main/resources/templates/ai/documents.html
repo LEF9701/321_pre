@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('AI Documents')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'ai-documents',
+        title: 'AI Documents',
+        data: {
+            docs: [
+                /*[# th:each="d : ${docs}"]*/
+                {
+                    id: [[${d.id}]],
+                    code: [[${d.code}]],
+                    title: [[${d.title}]],
+                    language: [[${d.language.name()}]],
+                    category: [[${d.category}]],
+                    content: [[${d.content}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Management')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-dashboard',
+        title: 'Overview',
+        data: {
+            residentCount: [[${residentCount}]],
+            openIssues: [[${openIssues}]],
+            overdueUnits: [[${overdueUnits}]],
+            recentIssues: [
+                /*[# th:each="i : ${recentIssues}"]*/
+                {
+                    id: [[${i.id}]],
+                    refNumber: [[${i.refNumber}]],
+                    category: [[${i.category.name()}]],
+                    status: [[${i.status.name()}]],
+                    priority: [[${i.priority.name()}]],
+                    reporterName: [[${i.reporter != null ? i.reporter.name : null}]]
+                },
+                /*[/]*/
+            ],
+            recentNotifications: [
+                /*[# th:each="n : ${recentNotifications}"]*/
+                {
+                    id: [[${n.id}]],
+                    createdAt: [[${#temporals.format(n.createdAt, 'MM-dd HH:mm')}]],
+                    title: [[${n.title}]],
+                    titleZh: [[${n.titleZh}]],
+                    category: [[${n.category.name()}]],
+                    dispatched: [[${n.dispatched}]],
+                    scheduledAt: [[${n.scheduledAt != null ? #temporals.format(n.scheduledAt, 'MM-dd HH:mm') : null}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

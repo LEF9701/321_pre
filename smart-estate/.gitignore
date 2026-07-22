@@ -1,0 +1,23 @@
+# ---- secrets & keys — NEVER commit ----
+*.pem
+*.key
+.env
+*.env
+
+# ---- build output ----
+target/
+frontend/node_modules/
+frontend/dist/
+
+# ---- internal design docs (excluded from this repo) ----
+docs/
+
+# ---- local tooling / IDE ----
+.claude/
+.idea/
+.vscode/
+*.iml
+
+# ---- OS / misc ----
+.DS_Store
+*.log

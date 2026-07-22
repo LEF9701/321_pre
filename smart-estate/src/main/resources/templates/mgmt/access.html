@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Access control')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-access',
+        title: 'Access control',
+        data: {
+            events: [
+                /*[# th:each="e : ${events}"]*/
+                {
+                    id: [[${e.id}]],
+                    card: [[${e.card}]],
+                    resident: [[${e.resident}]],
+                    point: [[${e.point}]],
+                    pointType: [[${e.pointType}]],
+                    direction: [[${e.direction}]],
+                    decision: [[${e.decision}]],
+                    reason: [[${e.reason}]],
+                    at: [[${e.at}]]
+                },
+                /*[/]*/
+            ],
+            pending: [
+                /*[# th:each="r : ${pending}"]*/
+                {
+                    id: [[${r.id}]],
+                    resident: [[${r.requester.name}]],
+                    unit: [[${r.requester.unit != null ? r.requester.unit.fullCode : null}]],
+                    action: [[${r.action.name()}]],
+                    cardNumber: [[${r.cardNumber}]],
+                    createdAt: [[${r.createdAt != null ? #temporals.format(r.createdAt, 'MM-dd HH:mm') : null}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

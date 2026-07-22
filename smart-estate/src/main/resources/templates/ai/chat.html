@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('AI Assistant')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'ai-chat',
+        title: 'AI Assistant',
+        data: {
+            claudeAvailable: [[${claudeAvailable}]],
+            question: [[${question}]],
+            result: /*[# th:if="${result != null}"]*/ {
+                answer: [[${result.answer}]],
+                mode: [[${result.mode}]],
+                refused: [[${result.refused}]],
+                sources: [
+                    /*[# th:each="s : ${result.sources}"]*/
+                    {
+                        label: [[${s.label}]],
+                        docCode: [[${s.docCode}]],
+                        title: [[${s.title}]],
+                        score: [[${s.score}]],
+                        snippet: [[${s.snippet}]]
+                    },
+                    /*[/]*/
+                ]
+            } /*[/]*/ /*[# th:unless="${result != null}"]*/ null /*[/]*/
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

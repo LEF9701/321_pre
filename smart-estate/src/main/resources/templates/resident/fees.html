@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('My Fees')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-fees',
+        title: 'Fees',
+        data: {
+            unit: /*[# th:if="${unit != null}"]*/ {
+                fullCode: [[${unit.fullCode}]],
+                feeStatus: [[${unit.feeStatus.name()}]],
+                balance: [[${unit.balance}]],
+                dueDate: [[${unit.dueDate != null ? #temporals.format(unit.dueDate, 'yyyy-MM-dd') : null}]]
+            } /*[/]*/ /*[# th:unless="${unit != null}"]*/ null /*[/]*/,
+            feeHistory: [
+                /*[# th:each="item : ${feeHistory}"]*/
+                {
+                    id: [[${item.notification.id}]],
+                    title: [[${item.notification.title}]],
+                    titleZh: [[${item.notification.titleZh}]],
+                    dispatchedAt: [[${#temporals.format(item.notification.dispatchedAt, 'MM-dd HH:mm')}]],
+                    channels: [[${item.channelsSummary}]],
+                    status: [[${item.bestStatus.name()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

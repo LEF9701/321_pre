@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# iOS / Xcode
+ios-app/build/
+**/xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Java / Maven
+smart-estate/target/
+
+# Node / frontend
+smart-estate/frontend/node_modules/
+smart-estate/frontend/dist/
+smart-estate/frontend/.vite/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets (safety net)
+.env
+*.env
+*.p8
+*.p12
+*.pem

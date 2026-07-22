@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Issue tracking')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-issues',
+        title: 'Issue Tracking',
+        data: {
+            statusFilter: [[${statusFilter != null ? statusFilter.name() : null}]],
+            issues: [
+                /*[# th:each="i : ${issues}"]*/
+                {
+                    id: [[${i.id}]],
+                    refNumber: [[${i.refNumber}]],
+                    createdAt: [[${#temporals.format(i.createdAt, 'MM-dd HH:mm')}]],
+                    unitFullCode: [[${i.unit != null ? i.unit.fullCode : null}]],
+                    category: [[${i.category.name()}]],
+                    priority: [[${i.priority.name()}]],
+                    status: [[${i.status.name()}]],
+                    assignedTo: [[${i.assignedTo}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

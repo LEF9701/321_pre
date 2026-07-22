@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Unit')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-unit-detail',
+        title: [[${unit.unitCode}]],
+        data: {
+            unit: {
+                id: [[${unit.id}]],
+                unitCode: [[${unit.unitCode}]],
+                status: [[${unit.status.name()}]],
+                feeStatus: [[${unit.feeStatus.name()}]],
+                balance: [[${unit.balance}]],
+                dueDate: [[${unit.dueDate != null ? #temporals.format(unit.dueDate, 'yyyy-MM-dd') : null}]],
+                blockId: [[${unit.floor.block.id}]]
+            },
+            occupants: [
+                /*[# th:each="o : ${occupants}"]*/
+                { name: [[${o.name}]], email: [[${o.email}]], phone: [[${o.phone}]] },
+                /*[/]*/
+            ],
+            issues: [
+                /*[# th:each="i : ${issues}"]*/
+                {
+                    id: [[${i.id}]],
+                    refNumber: [[${i.refNumber}]],
+                    category: [[${i.category.name()}]],
+                    status: [[${i.status.name()}]],
+                    priority: [[${i.priority.name()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Resident form')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-resident-form',
+        title: [[${isNew ? 'Add resident' : 'Edit resident'}]],
+        data: {
+            isNew: [[${isNew}]],
+            residentId: [[${resident.id}]],
+            name: [[${resident.name}]],
+            email: [[${resident.email}]],
+            phone: [[${resident.phone}]],
+            language: [[${resident.language != null ? resident.language.name() : null}]],
+            unitId: [[${resident.unit != null ? resident.unit.id : null}]],
+            units: [
+                /*[# th:each="u : ${units}"]*/
+                { id: [[${u.id}]], fullCode: [[${u.fullCode}]] },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

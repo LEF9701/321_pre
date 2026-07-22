@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Notification')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-notification',
+        title: [[${n.title}]],
+        data: {
+            n: {
+                title: [[${n.title}]],
+                titleZh: [[${n.titleZh}]],
+                category: [[${n.category.name()}]],
+                severity: [[${n.severity.name()}]],
+                dispatchedAt: [[${#temporals.format(n.dispatchedAt, 'yyyy-MM-dd HH:mm')}]],
+                createdByName: [[${n.createdByName}]],
+                contentEn: [[${n.contentEn}]],
+                contentZh: [[${n.contentZh}]]
+            },
+            logs: [
+                /*[# th:each="l : ${logs}"]*/
+                {
+                    channel: [[${l.channel.name()}]],
+                    recipientAddress: [[${l.recipientAddress}]],
+                    status: [[${l.status.name()}]],
+                    sentAt: [[${l.sentAt != null ? #temporals.format(l.sentAt, 'HH:mm:ss') : null}]],
+                    deliveredAt: [[${l.deliveredAt != null ? #temporals.format(l.deliveredAt, 'HH:mm:ss') : null}]],
+                    readAt: [[${l.readAt != null ? #temporals.format(l.readAt, 'HH:mm:ss') : null}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

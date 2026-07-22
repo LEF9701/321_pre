@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- APNs environment. Use "development" for debug builds; Xcode switches to production
+         automatically for App Store / TestFlight distribution. -->
+    <key>aps-environment</key>
+    <string>development</string>
+    <!-- Lets fire-alarm pushes break through Focus / scheduled summary. Free to enable (no Apple
+         approval). Upgrading to true Critical Alerts (overrides the mute switch in the background)
+         additionally requires the com.apple.developer.usernotifications.critical-alerts entitlement
+         granted by Apple. -->
+    <key>com.apple.developer.usernotifications.time-sensitive</key>
+    <true/>
+</dict>
+</plist>

@@ -1,0 +1,72 @@
+/* Smart Estate iOS — 繁體中文（香港）介面文字。鍵值須與 en.lproj 保持一致。 */
+
+/* 分頁 */
+"tab.alerts"   = "通知";
+"tab.settings" = "設定";
+
+/* 通用 */
+"common.loading" = "載入中…";
+
+/* 語言選擇 */
+"lang.system" = "跟隨系統";
+
+/* 登入 */
+"login.section"  = "登入 Smart Estate";
+"login.email"    = "電郵";
+"login.password" = "密碼";
+"login.signIn"   = "登入";
+"login.server"   = "伺服器：%@";
+"login.title"    = "Smart Estate";
+"login.invalidCredentials" = "電郵或密碼不正確。";
+"login.signInFailed"       = "無法登入，請檢查你的網絡連線及伺服器位址。";
+
+/* 設定 */
+"settings.title"       = "設定";
+"settings.account"     = "帳戶";
+"settings.name"        = "姓名";
+"settings.email"       = "電郵";
+"settings.role"        = "角色";
+"settings.push"        = "推送通知";
+"settings.permission"  = "權限";
+"settings.granted"     = "已授權";
+"settings.notGranted"  = "未授權";
+"settings.device"      = "裝置";
+"settings.pending"     = "待處理";
+"settings.registered"  = "已註冊";
+"settings.language"    = "語言";
+"settings.demo"        = "示範";
+"settings.testAlarm"   = "測試火警警報（本機）";
+"settings.signOut"     = "登出";
+
+/* 收件匣 */
+"inbox.title"     = "通知";
+"inbox.loadError" = "無法載入通知。";
+"inbox.emptyTitle" = "暫時未有通知";
+"inbox.emptyDesc" = "屋苑通知將會顯示在這裡。";
+
+/* 警報 */
+"alarm.acknowledge"  = "我已知悉";
+"alarm.defaultTitle" = "緊急事故";
+"alarm.fireTitle"    = "火警警報 — 請立即疏散";
+"alarm.fireBody"     = "接獲火警報告，請立即使用最近的樓梯疏散，切勿使用升降機。";
+"alarm.genericTitle" = "%@緊急事故";
+"alarm.genericBody"  = "已發佈緊急事故，請遵從職員指示。";
+
+/* 列舉標籤 — 對應 smart-estate/frontend/src/lib/enums.js */
+"enum.EMERGENCY"            = "緊急事故";
+"enum.ANNOUNCEMENT"         = "公告";
+"enum.MEETING"             = "會議／業主大會通知";
+"enum.FEE_REMINDER"         = "費用提醒";
+"enum.SERVICE_INTERRUPTION" = "服務中斷";
+"enum.MAINTENANCE"          = "維修保養";
+"enum.OBSERVATORY"          = "天文台警告";
+"enum.GENERAL"              = "一般事項";
+"enum.INFO"                 = "一般";
+"enum.WARNING"              = "警示";
+"enum.CRITICAL"             = "緊急";
+"enum.FIRE"                 = "火警";
+"enum.TYPHOON"              = "颱風";
+"enum.FLOOD"                = "水浸";
+"enum.GAS_LEAK"             = "氣體洩漏";
+"enum.STRUCTURAL"           = "結構問題";
+"enum.OTHER"                = "其他";

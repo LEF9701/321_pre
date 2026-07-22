@@ -1,0 +1,72 @@
+/* Smart Estate iOS — English UI strings. Keep keys in sync with zh-Hant.lproj. */
+
+/* Tabs */
+"tab.alerts"   = "Alerts";
+"tab.settings" = "Settings";
+
+/* Common */
+"common.loading" = "Loading…";
+
+/* Language picker */
+"lang.system" = "Follow system";
+
+/* Login */
+"login.section"  = "Sign in to Smart Estate";
+"login.email"    = "Email";
+"login.password" = "Password";
+"login.signIn"   = "Sign in";
+"login.server"   = "Server: %@";
+"login.title"    = "Smart Estate";
+"login.invalidCredentials" = "Invalid email or password.";
+"login.signInFailed"       = "Couldn't sign in. Check your connection and the server address.";
+
+/* Settings */
+"settings.title"       = "Settings";
+"settings.account"     = "Account";
+"settings.name"        = "Name";
+"settings.email"       = "Email";
+"settings.role"        = "Role";
+"settings.push"        = "Push";
+"settings.permission"  = "Permission";
+"settings.granted"     = "Granted";
+"settings.notGranted"  = "Not granted";
+"settings.device"      = "Device";
+"settings.pending"     = "Pending";
+"settings.registered"  = "Registered";
+"settings.language"    = "Language";
+"settings.demo"        = "Demo";
+"settings.testAlarm"   = "Test fire alarm (local)";
+"settings.signOut"     = "Sign out";
+
+/* Inbox */
+"inbox.title"     = "Alerts";
+"inbox.loadError" = "Couldn't load alerts.";
+"inbox.emptyTitle" = "No alerts yet";
+"inbox.emptyDesc" = "Estate notifications will appear here.";
+
+/* Alarm */
+"alarm.acknowledge"  = "ACKNOWLEDGE";
+"alarm.defaultTitle" = "Emergency";
+"alarm.fireTitle"    = "FIRE ALARM — EVACUATE NOW";
+"alarm.fireBody"     = "A fire has been reported. Evacuate immediately using the nearest staircase. Do not use the lifts.";
+"alarm.genericTitle" = "%@ EMERGENCY";
+"alarm.genericBody"  = "An emergency has been declared. Please follow staff instructions.";
+
+/* Enum labels — mirror smart-estate/frontend/src/lib/enums.js */
+"enum.EMERGENCY"            = "Emergency";
+"enum.ANNOUNCEMENT"         = "Announcement";
+"enum.MEETING"             = "Meeting / AGM Notice";
+"enum.FEE_REMINDER"         = "Fee Reminder";
+"enum.SERVICE_INTERRUPTION" = "Service Interruption";
+"enum.MAINTENANCE"          = "Maintenance";
+"enum.OBSERVATORY"          = "HK Observatory Alert";
+"enum.GENERAL"              = "General";
+"enum.INFO"                 = "Info";
+"enum.WARNING"              = "Warning";
+"enum.CRITICAL"             = "Critical";
+"enum.FIRE"                 = "Fire";
+"enum.TYPHOON"              = "Typhoon";
+"enum.FLOOD"                = "Flood";
+"enum.GAS_LEAK"             = "Gas Leak";
+"enum.STRUCTURAL"           = "Structural";
+"enum.OTHER"                = "Other";

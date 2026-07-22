@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Fee collection')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-fees',
+        title: 'Fee Collection',
+        data: {
+            totalOccupied: [[${totalOccupied}]],
+            paid: [[${paid}]],
+            due: [[${due}]],
+            overdue: [[${overdue}]],
+            collectionRate: [[${collectionRate}]],
+            rows: [
+                /*[# th:each="u : ${rows}"]*/
+                {
+                    id: [[${u.id}]],
+                    fullCode: [[${u.fullCode}]],
+                    occupant: [[${occupant.get(u.id) != null ? occupant.get(u.id) : null}]],
+                    feeStatus: [[${u.feeStatus.name()}]],
+                    balance: [[${u.balance}]],
+                    dueDate: [[${u.dueDate != null ? #temporals.format(u.dueDate, 'yyyy-MM-dd') : null}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

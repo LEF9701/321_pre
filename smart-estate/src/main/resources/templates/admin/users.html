@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Users')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-users',
+        title: 'Users & Roles',
+        data: {
+            users: [
+                /*[# th:each="u : ${users}"]*/
+                {
+                    id: [[${u.id}]],
+                    name: [[${u.name}]],
+                    email: [[${u.email}]],
+                    role: [[${u.role.name()}]],
+                    enabled: [[${u.enabled}]],
+                    unitFullCode: [[${u.unit != null ? u.unit.fullCode : null}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

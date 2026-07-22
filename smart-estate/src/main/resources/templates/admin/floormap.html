@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Floor map')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-floormap',
+        title: 'Floor Map',
+        data: {
+            selectedBuilding: [[${selectedBuilding}]],
+            buildings: [
+                /*[# th:each="b : ${buildings}"]*/
+                {
+                    id: [[${b.id}]],
+                    name: [[${b.name}]]
+                },
+                /*[/]*/
+            ],
+            maps: [
+                /*[# th:each="bm : ${maps}"]*/
+                {
+                    blockId: [[${bm.blockId}]],
+                    blockName: [[${bm.blockName}]],
+                    blockType: [[${bm.blockType}]],
+                    totalUnits: [[${bm.totalUnits}]],
+                    occupied: [[${bm.occupied}]],
+                    vacant: [[${bm.vacant}]],
+                    openIssues: [[${bm.openIssues}]],
+                    overdue: [[${bm.overdue}]],
+                    occupancyPct: [[${bm.occupancyPct}]],
+                    rows: [
+                        /*[# th:each="row : ${bm.rows}"]*/
+                        {
+                            floorNumber: [[${row.floorNumber}]],
+                            cells: [
+                                /*[# th:each="cell : ${row.cells}"]*/
+                                {
+                                    unitId: [[${cell.unitId}]],
+                                    unitCode: [[${cell.unitCode}]],
+                                    state: [[${cell.state}]],
+                                    stateLabel: [[${cell.stateLabel}]],
+                                    letter: [[${cell.letter}]],
+                                    occupant: [[${cell.occupant}]]
+                                },
+                                /*[/]*/
+                            ]
+                        },
+                        /*[/]*/
+                    ]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

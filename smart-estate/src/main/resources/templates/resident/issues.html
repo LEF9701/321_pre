@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('My Issues')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'resident-issues',
+        title: 'My Issues',
+        data: {
+            issues: [
+                /*[# th:each="i : ${issues}"]*/
+                {
+                    id: [[${i.id}]],
+                    refNumber: [[${i.refNumber}]],
+                    createdAt: [[${#temporals.format(i.createdAt, 'yyyy-MM-dd HH:mm')}]],
+                    category: [[${i.category.name()}]],
+                    status: [[${i.status.name()}]],
+                    priority: [[${i.priority.name()}]],
+                    assignedTo: [[${i.assignedTo}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

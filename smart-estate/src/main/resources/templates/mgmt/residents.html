@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Residents')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-residents',
+        title: 'Residents',
+        data: {
+            q: [[${q}]],
+            blockFilter: [[${blockFilter}]],
+            blocks: [
+                /*[# th:each="b : ${blocks}"]*/
+                { id: [[${b.id}]], blockName: [[${b.blockName}]] },
+                /*[/]*/
+            ],
+            residents: [
+                /*[# th:each="r : ${residents}"]*/
+                {
+                    id: [[${r.id}]],
+                    name: [[${r.name}]],
+                    email: [[${r.email}]],
+                    phone: [[${r.phone}]],
+                    unitFullCode: [[${r.unit != null ? r.unit.fullCode : null}]],
+                    language: [[${r.language.name()}]]
+                },
+                /*[/]*/
+            ]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

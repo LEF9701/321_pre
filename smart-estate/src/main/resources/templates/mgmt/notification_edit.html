@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Edit notice')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'mgmt-notification-edit',
+        title: 'Edit notice',
+        data: {
+            n: {
+                id: [[${n.id}]],
+                title: [[${n.title}]],
+                titleZh: [[${n.titleZh}]],
+                category: [[${n.category.name()}]],
+                severity: [[${n.severity.name()}]],
+                contentEn: [[${n.contentEn}]],
+                contentZh: [[${n.contentZh}]]
+            }
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>

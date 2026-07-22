@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/island :: head('Admin')}"></head>
+<body>
+<div id="root"></div>
+<th:block th:replace="~{fragments/island :: appctx}"></th:block>
+<script th:inline="javascript">
+    window.__PAGE__ = {
+        name: 'admin-home',
+        title: 'Admin Home',
+        data: {
+            buildingCount: [[${buildingCount}]],
+            blockCount: [[${blockCount}]],
+            unitCount: [[${unitCount}]],
+            userCount: [[${userCount}]]
+        }
+    };
+</script>
+<script th:replace="~{fragments/island :: bundle}"></script>
+</body>
+</html>
